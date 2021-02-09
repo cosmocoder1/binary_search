@@ -18,7 +18,7 @@ binary_search(arr, 5)
 =end
 
 
-#tree creation / traversal
+#tree creation / level-order traversal
 class Node 
   attr_accessor :data, :left_child, :right_child
   def initialize (data, left_child, right_child)
@@ -31,8 +31,31 @@ end
 $queue = []
 
 def enqueue (node)
-  $queue.push(node.left_child)
-  $queue.push(node.right_child)
+  puts ""
+  puts "node data..."
+  puts node.data
+  if !node.left_child != nil 
+    $queue.push(node.left_child)
+  end  
+  if !node.right_child != nil
+    $queue.push(node.right_child)
+  end
+  dequeue
+  puts "next in queue"
+
+ 
+  def show_queue
+      i = $queue.length - 1
+      j = 0
+  while j <= i do 
+      print $queue[j].data
+      j += 1
+    end  
+  end
+
+  show_queue
+
+
 end  
 
 def dequeue ()
@@ -56,24 +79,23 @@ c = Node.new("C", f, g)
 b = Node.new("B", d, e)
 a = Node.new("A", b, c)
 
+
 def level_order_traversal (node)
-
-  puts node.data
   
-  dequeue
+  if node == nil
+    return
+  end  
 
+  #start case
   if $queue.empty? 
-    $queue.push(node)
+    enqueue(node)
   end
 
-
-  if node.left_child == nil || node.right_child == nil
-    puts node.data
+  if node.left_child == nil && node.right_child == nil
     dequeue
     enqueue($queue[0])
   end
 
-  
   enqueue(node)  
   level_order_traversal($queue[0])
  
@@ -82,3 +104,6 @@ end
 
 level_order_traversal(a)  
     
+
+
+
