@@ -31,31 +31,23 @@ end
 $queue = []
 
 def enqueue (node)
-  puts ""
-  puts "node data..."
+  if $queue.empty? 
+    $queue.push(node)
+  end
   puts node.data
-  if !node.left_child != nil 
+  if node.left_child != nil 
     $queue.push(node.left_child)
   end  
-  if !node.right_child != nil
+  if node.right_child != nil
     $queue.push(node.right_child)
   end
   dequeue
-  puts "next in queue"
+end  
 
- 
-  def show_queue
-      i = $queue.length - 1
-      j = 0
-  while j <= i do 
-      print $queue[j].data
-      j += 1
-    end  
+def leaf(node)
+  if node.left_child == nil && node.right_child == nil
+    enqueue($queue[0])
   end
-
-  show_queue
-
-
 end  
 
 def dequeue ()
@@ -86,21 +78,15 @@ def level_order_traversal (node)
     return
   end  
 
-  #start case
-  if $queue.empty? 
-    enqueue(node)
-  end
-
-  if node.left_child == nil && node.right_child == nil
-    dequeue
-    enqueue($queue[0])
-  end
-
-  enqueue(node)  
-  level_order_traversal($queue[0])
+  if node.right_child == nil && node.left_child == nil
+    leaf(node)
+    level_order_traversal($queue[0])
+  else
+    enqueue(node)  
+    level_order_traversal($queue[0])
+  end  
  
 end
-
 
 level_order_traversal(a)  
     
