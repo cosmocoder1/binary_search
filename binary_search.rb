@@ -63,7 +63,7 @@ end
   
 #level_order_traversal(a)
 
-
+#preorder - depth-first
 def preorder_depth_first_traversal (node)
 
   puts node.data
@@ -76,8 +76,37 @@ def preorder_depth_first_traversal (node)
   preorder_depth_first_traversal(node.right_child)
 end  
     
-#preorder_depth_first_traversal(a)
+preorder_depth_first_traversal(a)
 
 
+#inorder - depth-first
+def inorder_depth_first_traversal (node)
 
+  if node == nil 
+    return
+  end  
+
+  inorder_depth_first_traversal(node.left_child)
+  puts node.data
+  inorder_depth_first_traversal(node.right_child)
+
+end    
+  
+#inorder_depth_first_traversal(a)
+
+
+#postorder - depth-first
+def postorder_depth_first_traversal (node)
+
+  if node == nil
+    return
+  end
+  
+  inorder_depth_first_traversal(node.left_child)
+  inorder_depth_first_traversal(node.right_child)
+  puts node.data
+
+end
+  
+#postorder_depth_first_traversal(a)
 
